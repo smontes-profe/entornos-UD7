@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Lanzar UD 7 (Chrome)",
+            "type": "chrome",
+            "request": "launch",
+            "file": "${workspaceFolder}/index.html",
+            "presentation": {
+                "group": "primary",
+                "order": 1
+            }
+        }
+    ]
+}

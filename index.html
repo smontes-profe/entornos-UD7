@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UD 7: Dominando los Diagramas de Casos de Uso | Ilerna</title>
+    <meta name="description" content="Aprende a modelar requisitos con Diagramas de Casos de Uso. Exploración interactiva y laboratorio UML.">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body class="dark-theme">
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo-area">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/LOGO_ILERNA.png" alt="Ilerna Logo" class="ilerna-logo">
+                <div class="header-text">
+                    <span class="badge">UD 7: Entornos de Desarrollo</span>
+                    <h1>Dominando los Diagramas de Casos de Uso</h1>
+                </div>
+            </div>
+            <div class="author-info">
+                <p>Profesor: <strong>Sergio Montes Repiso</strong></p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero / Intro -->
+        <section id="intro" class="hero">
+            <div class="container grid">
+                <div class="hero-content">
+                    <h2 class="gradient-text">El "Contrato" con el Cliente</h2>
+                    <p class="lead">Un diagrama de casos de uso no es solo un dibujo; es la representación visual de las funcionalidades que el sistema debe ofrecer. Es el lenguaje común entre el desarrollador y el cliente.</p>
+                    <div class="info-cards">
+                        <div class="info-card">
+                            <div class="icon">🔍</div>
+                            <h3>¿Qué es?</h3>
+                            <p>Un diagrama de comportamiento que describe lo que hace un sistema, no cómo lo hace.</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="icon">🤝</div>
+                            <h3>El "Contrato"</h3>
+                            <p>Define el alcance del proyecto y evita malentendidos sobre las funcionalidades pactadas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="mermaid">
+                        graph LR
+                            User((Usuario)) -- Interactúa --> System[Sistema]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Anatomy Section -->
+        <section id="anatomy" class="anatomy-section">
+            <div class="container">
+                <h2 class="section-title">Anatomía del Diagrama</h2>
+                <div class="anatomy-grid">
+                    <div class="anatomy-card" data-concept="actor">
+                        <div class="card-header">
+                            <span class="concept-icon">👤</span>
+                            <h3>Actores</h3>
+                        </div>
+                        <p>Roles externos que interactúan con el sistema. Puede ser una persona, otro sistema o incluso el tiempo.</p>
+                        <div class="concept-example">
+                            <pre class="mermaid">
+                                graph TD
+                                    A((Cliente))
+                                    B((Admin))
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="anatomy-card" data-concept="usecase">
+                        <div class="card-header">
+                            <span class="concept-icon">🔵</span>
+                            <h3>Casos de Uso</h3>
+                        </div>
+                        <p>Una unidad funcional del sistema. Representa una acción o un proceso completo que aporta valor al actor.</p>
+                        <div class="concept-example">
+                            <pre class="mermaid">
+                                graph TD
+                                    UC([Realizar Pedido])
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="anatomy-card" data-concept="relations">
+                        <div class="card-header">
+                            <span class="concept-icon">🔗</span>
+                            <h3>Relaciones</h3>
+                        </div>
+                        <p>Conexiones entre elementos. Incluye Asociaciones, <code>&lt;&lt;include&gt;&gt;</code> y <code>&lt;&lt;extend&gt;&gt;</code>.</p>
+                        <div class="concept-example">
+                            <pre class="mermaid">
+                                graph LR
+                                    A([Login]) -. &lt;&lt;include&gt;&gt; .-> B([Verificar Pass])
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sandbox / Laboratorio -->
+        <section id="laboratory" class="lab-section">
+            <div class="container">
+                <div class="lab-header">
+                    <h2 class="section-title">Laboratorio UML</h2>
+                    <p>Experimenta en tiempo real con la sintaxis de Mermaid para crear tus diagramas.</p>
+                </div>
+                
+                <div class="lab-container">
+                    <div class="lab-editor">
+                        <div class="editor-header">
+                            <span>✍️ Editor de Código</span>
+                            <button id="reset-code" class="btn-small">Reiniciar</button>
+                        </div>
+                        <textarea id="mermaid-input" spellcheck="false">useCaseDiagram
+    actor "Cliente" as C
+    actor "Admin" as A
+
+    package "Tienda Online" {
+        usecase "Realizar Compra" as UC1
+        usecase "Validar Pago" as UC2
+        usecase "Gestionar Stock" as UC3
+    }
+
+    C --> UC1
+    UC1 ..> UC2 : <<include>>
+    A --> UC3</textarea>
+                    </div>
+                    <div class="lab-preview">
+                        <div class="preview-header">
+                            <span>📊 Vista Previa</span>
+                            <div class="status-indicator" id="render-status">Listo</div>
+                        </div>
+                        <div id="mermaid-render" class="mermaid-target">
+                            <!-- El diagrama se renderizará aquí -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-box">
+                    <div class="challenge-icon">🎯</div>
+                    <div class="challenge-content">
+                        <h3>Misión: Sistema de Tienda Online</h3>
+                        <p>Modela el siguiente escenario en el laboratorio:</p>
+                        <ul>
+                            <li>Un <strong>Cliente</strong> puede "Ver Productos".</li>
+                            <li>Un <strong>Cliente</strong> puede "Realizar Pedido".</li>
+                            <li>"Realizar Pedido" siempre <strong>incluye</strong> "Autenticarse".</li>
+                            <li>"Realizar Pedido" puede ser <strong>extendido</strong> por "Aplicar Cupón Descuento".</li>
+                            <li>Un <strong>Administrador</strong> puede "Gestionar Catálogo".</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Ilerna - Entornos de Desarrollo. Realizado por Sergio Montes Repiso.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
